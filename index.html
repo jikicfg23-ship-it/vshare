@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0f172a">
+  <title>vShare - نقل سريع بدون نت</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- الهيدر -->
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">⚡</span>
+        <h1>vShare</h1>
+      </div>
+      <span id="status-badge" class="badge disconnected">غير متصل</span>
+    </header>
+
+    <!-- الشاشة الرئيسية: اختيار الإرسال أو الاستقبال -->
+    <main id="home-screen" class="screen active">
+      <p class="subtitle">انقل الصور، الفيديو، الموسيقى والتطبيقات بأقصى سرعة عبر الواي فاي المحلي</p>
+      
+      <div class="action-cards">
+        <button id="btn-create-room" class="card-btn send-btn">
+          <div class="icon-circle">📤</div>
+          <h2>إرسال (إنشاء غرفة)</h2>
+          <p>افتح نقطة اتصال (Hotspot) وشارك الكود</p>
+        </button>
+
+        <button id="btn-join-room" class="card-btn receive-btn">
+          <div class="icon-circle">📥</div>
+          <h2>استقبال (انضمام)</h2>
+          <p>امسح كود QR للاتصال بالجهاز الآخر</p>
+        </button>
+      </div>
+    </main>
+
+    <!-- شاشة الربط عبر QR Code -->
+    <section id="connect-screen" class="screen hidden">
+      <button id="btn-back" class="back-btn">➔ رجوع</button>
+      <h2 id="connect-title">جاري التجهيز...</h2>
+      <p id="connect-instruction" class="instruction"></p>
+
+      <!-- منطقة عرض الـ QR -->
+      <div id="qr-display-box" class="qr-box hidden">
+        <div id="qrcode"></div>
+      </div>
+
+      <!-- منطقة الكاميرا لمسح الـ QR -->
+      <div id="qr-scanner-box" class="scanner-box hidden">
+        <div id="reader"></div>
+      </div>
+
+      <button id="btn-next-step" class="primary-btn hidden">تم المسح، انتقل للخطوة التالية</button>
+    </section>
+
+    <!-- شاشة نقل الملفات بعد الاتصال -->
+    <section id="transfer-screen" class="screen hidden">
+      <div class="upload-area" id="drop-zone">
+        <input type="file" id="file-input" multiple hidden>
+        <div class="upload-icon">📁</div>
+        <h3>اختر الملفات للإرسال</h3>
+        <p>صور، فيديوهات، صوتيات، أو ملفات APK</p>
+        <button id="btn-select-files" class="primary-btn">تصفح ملفات الهاتف</button>
+      </div>
+
+      <!-- قائمة الملفات المنقولة -->
+      <div class="transfers-list">
+        <h3>سجل النقل</h3>
+        <div id="files-container"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- استدعاء المكتبات المحلية للعمل بدون نت -->
+  <script src="libs/qrcode.min.js"></script>
+  <script src="libs/html5-qrcode.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
